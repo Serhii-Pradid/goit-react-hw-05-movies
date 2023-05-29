@@ -1,25 +1,51 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { fetchDetailsMovies } from "components/Api";
 
 const MovieDetails = () => {
 
     const {movieId} = useParams();
+    const [movieDetails, setMovieDetails] = useState([]);
     console.log(movieId);
 
-    // делаем стейт
-    // делаем эффект
-    // делаем гет запрос
-    // записываем стейт 
+    const { poster, title, vote, overview, genre_ids, year
+    } = movieDetails ?? {};
+
+    useEffect(() => {
+
+        async function getMovieDetails() {
+
+            try { 
+                const detailsMovie = await fetchDetailsMovies(movieId);
+                console.log(detailsMovie)
+                setMovieDetails(detailsMovie)
     
-    //useEffect(() => {
-    //http запрос на монтировании страницы информации о фильме
-    // }, [])
+            } catch(error) {
+               console.log(error)
+            }};
+    
+            getMovieDetails();
+            
+
+    }, [movieId])
     
     return (
-        <> 
-        <h1>MovieDetails: {movieId}</h1>
-        <h3>Addition information</h3>
+        <div> 
+        <div>
+            {movieDetails && (
+                <div>
+                <img src={poster} alt={title} />
+                <h1>{title}({year})</h1>
+                <p>User score: {vote}</p>
+                <h2>Overweiw</h2>
+                <p>{overview}</p>
+                <h3>Genres</h3>
+                <p>{genre_ids}</p>
+        </div>
+            )}
+        </div>
+        
         <ul>
             <li>
                 <Link to='cast'> Cast</Link>
@@ -29,7 +55,7 @@ const MovieDetails = () => {
             </li>
         </ul>
         <Outlet/>
-        </> // рендерим тут любую разметку, которая мне нужна
+        </div> 
     )
 };
 
