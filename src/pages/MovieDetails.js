@@ -2,15 +2,19 @@ import { useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { fetchDetailsMovies } from "components/Api";
+//import { fetchGenres } from "components/Api";
 
 const MovieDetails = () => {
 
     const {movieId} = useParams();
     const [movieDetails, setMovieDetails] = useState([]);
+    //const [movieGenres, setMovieGengres] = useState([]);
     console.log(movieId);
 
-    const { poster, title, vote, overview, genre_ids, year
+    const { poster, title, vote, genres, overview, year
     } = movieDetails ?? {};
+
+    //const {id, name} = movieGenres ?? {};
 
     useEffect(() => {
 
@@ -29,6 +33,21 @@ const MovieDetails = () => {
             
 
     }, [movieId])
+
+    /*useEffect(() => {
+        async function getMovieGenres() {
+            try { 
+                const detailsGenres = await fetchGenres();
+                console.log(detailsGenres)
+                setMovieGengres(detailsGenres.genres)
+    
+            } catch(error) {
+               console.log(error)
+            }};
+    
+            getMovieGenres();
+                 
+    },[])*/
     
     return (
         <div> 
@@ -41,7 +60,7 @@ const MovieDetails = () => {
                 <h2>Overweiw</h2>
                 <p>{overview}</p>
                 <h3>Genres</h3>
-                <p>{genre_ids}</p>
+                <p>{genres}</p>
         </div>
             )}
         </div>

@@ -28,10 +28,10 @@ export const fetchTrandingMovies = async() => {
 export const fetchDetailsMovies = async(movieId) => {
 
       const response = await axios.get(
-            `${URL}/movie/${movieId}?api_key=${API_KEY}`
+            `${URL}movie/${movieId}?api_key=${API_KEY}`
       );
       
-      const {id, title, poster_path: poster, overview, vote_average, genre_ids, release_date
+      const {id, title, poster_path: poster, overview, vote_average, genres, release_date
       } = response.data;
 
           return {
@@ -40,10 +40,30 @@ export const fetchDetailsMovies = async(movieId) => {
             poster: BASE_URL + poster,
             overview,
             vote: vote_average.toFixed(1),
-            genre_ids,
+            genres: genres.map(genre => genre.name).join(', '),
             year: release_date.slice(0, 4),
             };
         };
+
+
+        /*export const fetchGenres = async() => {
+
+          const response = await axios.get(
+              `${URL}genre/movie/list?api_key=${API_KEY}`
+          );
+          //console.log(response)
+      
+          const genres = response.data.genres.map(({ id, name }) => {
+              return {
+                id,
+                name,
+                };
+            });
+          console.log(genres)
+            return {genres};
+          };*/
+
+
 
         export const fetchCredits = async(movieId) => {
 
