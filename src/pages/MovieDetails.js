@@ -9,7 +9,7 @@ const MovieDetails = () => {
     const {movieId} = useParams();
     const [movieDetails, setMovieDetails] = useState([]);
     //const [movieGenres, setMovieGengres] = useState([]);
-    console.log(movieId);
+    //console.log(movieId);
 
     const { poster, title, vote, genres, overview, year
     } = movieDetails ?? {};
@@ -20,7 +20,7 @@ const MovieDetails = () => {
 
             try { 
                 const detailsMovie = await fetchDetailsMovies(movieId);
-                console.log(detailsMovie)
+                //console.log(detailsMovie)
                 setMovieDetails(detailsMovie)
     
             } catch(error) {

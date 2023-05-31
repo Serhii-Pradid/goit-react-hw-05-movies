@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import { fetchCredits } from "./Api";
+import { fetchCredits } from "../Api";
 import { useState, useEffect } from "react";
 
 export const Cast = () => {

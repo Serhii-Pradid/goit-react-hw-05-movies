@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { fetchRewies } from "./Api";
+import { fetchRewies } from "../Api";
 import { useState, useEffect } from "react";
 
 export const Rewies = () => {
@@ -12,7 +12,7 @@ export const Rewies = () => {
 
             try {
                 const detailsRewies = await fetchRewies(movieId);
-                console.log(detailsRewies);
+                //console.log(detailsRewies);
                 setRewies(detailsRewies.rewiesData)
                 
             } catch (error) {

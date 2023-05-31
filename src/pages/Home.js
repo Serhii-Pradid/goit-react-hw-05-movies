@@ -13,7 +13,7 @@ const Home = () => {
 
         try { 
             const trandingMovies = await fetchTrandingMovies();
-            console.log(trandingMovies)
+            //console.log(trandingMovies)
             setMovies(trandingMovies.movies)
 
         } catch(error) {
