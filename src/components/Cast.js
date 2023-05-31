@@ -1,11 +1,38 @@
 import { useParams } from "react-router-dom"
+import { fetchCredits } from "./Api";
+import { useState, useEffect } from "react";
 
 export const Cast = () => {
-    const {movieId} = useParams()
+    const {movieId} = useParams();
+    const [castDetails, setCastDetails] = useState([]);
 
-    //useEffect(() => {
-        //http запрос на монтировании страницы информации об актерах
-        // }, [])
+    useEffect(() => {
 
-    return <div> Cast: {movieId} </div>
-};
+        async function getCastDetails() {
+
+            try { 
+                const detailsCast = await fetchCredits(movieId);
+                console.log(detailsCast)
+                setCastDetails(detailsCast.cast)
+    
+            } catch(error) {
+               console.log(error)
+            }};
+    
+            getCastDetails();  
+                
+        }, [movieId]);
+
+    return (
+    <div> 
+        {castDetails.length > 0 && (castDetails.map(({id, name, photo, character}) => (
+           <ul key={id}>
+        <img src={photo} alt={name} /> 
+        <h1>{name}</h1>
+        <h2>Character: {character}</h2>
+           </ul>
+        ))
+        )}
+        </div>
+    )
+    };

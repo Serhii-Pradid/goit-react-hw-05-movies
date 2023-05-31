@@ -1,5 +1,6 @@
 
 import axios from 'axios';
+import noPhoto from '../Images/nophoto.jpg'
 
 const API_KEY = '2913f54037fb6fa761373ffd7bea2e58';
 const URL = 'https://api.themoviedb.org/3/';
@@ -46,40 +47,42 @@ export const fetchDetailsMovies = async(movieId) => {
         };
 
 
-        /*export const fetchGenres = async() => {
 
-          const response = await axios.get(
-              `${URL}genre/movie/list?api_key=${API_KEY}`
+export const fetchCredits = async(movieId) => {
+
+    const response = await axios.get(
+          `${URL}/movie/${movieId}/credits?api_key=${API_KEY}`
           );
-          //console.log(response)
-      
-          const genres = response.data.genres.map(({ id, name }) => {
-              return {
-                id,
-                name,
+
+    const cast = response.data.cast.map(({id, name, profile_path: photo, character}) => {
+            
+        return {
+          id,
+          name,
+          photo: photo ? BASE_URL + photo : noPhoto ,
+          character,
                 };
-            });
-          console.log(genres)
-            return {genres};
-          };*/
+                });
+         
+        console.log(cast)
+        return{cast}
+              }
 
-
-
-        export const fetchCredits = async(movieId) => {
+export const fetchRewies = async(movieId) => {
 
           const response = await axios.get(
-                `${URL}/movie/${movieId}/credits?api_key=${API_KEY}`
-          );
-          
-          const {id, name, profile_path:poster, character
-          } = response.data;
-    
+                `${URL}/movie/${movieId}/reviews?api_key=${API_KEY}`
+                );
+      
+          const rewiesData = response.data.results.map(({id, author, content}) => {
+                  
               return {
                 id,
-                name,
-                poster: BASE_URL + poster,
-                character
-                                };
-            };
-      
-      
+                author,
+                content,
+                  };
+                });
+               
+              console.log(rewiesData)
+              return{rewiesData}
+                    }

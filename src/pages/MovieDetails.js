@@ -14,9 +14,7 @@ const MovieDetails = () => {
     const { poster, title, vote, genres, overview, year
     } = movieDetails ?? {};
 
-    //const {id, name} = movieGenres ?? {};
-
-    useEffect(() => {
+   useEffect(() => {
 
         async function getMovieDetails() {
 
@@ -34,21 +32,6 @@ const MovieDetails = () => {
 
     }, [movieId])
 
-    /*useEffect(() => {
-        async function getMovieGenres() {
-            try { 
-                const detailsGenres = await fetchGenres();
-                console.log(detailsGenres)
-                setMovieGengres(detailsGenres.genres)
-    
-            } catch(error) {
-               console.log(error)
-            }};
-    
-            getMovieGenres();
-                 
-    },[])*/
-    
     return (
         <div> 
         <div>
