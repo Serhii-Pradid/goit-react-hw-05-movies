@@ -1,6 +1,7 @@
 
 import axios from 'axios';
-import noPhoto from '../Images/nophoto.jpg'
+import noPhoto from '../Images/nophoto.jpg';
+import noPoster from '../Images/noposter.jpg';
 
 const API_KEY = '2913f54037fb6fa761373ffd7bea2e58';
 const URL = 'https://api.themoviedb.org/3/';
@@ -38,7 +39,7 @@ export const fetchDetailsMovies = async(movieId) => {
           return {
             id,
             title,
-            poster: BASE_URL + poster,
+            poster: poster ? BASE_URL + poster : noPoster,
             overview,
             vote: vote_average.toFixed(1),
             genres: genres.map(genre => genre.name).join(', '),

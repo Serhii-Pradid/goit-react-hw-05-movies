@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { fetchTrandingMovies } from "components/Api";
-import { Link } from "react-router-dom";
+import { useLocation} from "react-router-dom";
 
+import { MovieLink, Title } from './Home.styled';
     
 const Home = () => {
     const [movies, setMovies] = useState([])
+    const location = useLocation();
 
     useEffect(() => {
         //console.log('монтируем страницу');
@@ -24,23 +26,21 @@ const Home = () => {
         
     }, []);
 
-        return (
+    return (
         <div>
-        <h3>Tranding today</h3>
+        <Title>Tranding today</Title>
 
         {movies.length > 0 && (movies.map(({id, title}) => (
           <ul key={id}>  
             <li>
-                <Link to={`/movies/${id}`}> {title} </Link>      
+                <MovieLink to={`/movies/${id}`} state={{from:location}}> → {title} </MovieLink>      
             </li>
           </ul> 
             ))
         )}
-        
-        </div>
+         </div>
     )
 };
-
 
 export default Home;
 

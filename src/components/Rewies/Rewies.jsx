@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
 import { fetchRewies } from "../Api";
 import { useState, useEffect } from "react";
+import { RewiesContent,RewiesList, RewiesName } from "./Rewies.styled";
 
-export const Rewies = () => {
+const Rewies = () => {
     const {movieId} = useParams();
     const [rewies, setRewies] = useState([]);
 
@@ -23,14 +24,21 @@ export const Rewies = () => {
         }, [movieId])
         
     return (
-    <div> 
-    {rewies.length > 0 && (rewies.map(({id, author, content }) => (
-        <ul key={id}>
-<li> Author: {author} </li>
-<li> About movie: </li>
-<p>{content}</p>
-</ul>
-    )))}
-    </div>
+    <> 
+    {rewies.length > 0 ? (
+    <>
+        {rewies.map(({id, author, content }) => (
+       <RewiesList key={id}>
+       <RewiesName> Author:  {author} </RewiesName>
+       <RewiesContent>{content}</RewiesContent>
+       </RewiesList>
+        ))}
+    </>   
+    
+    ) : ( <h3> We don't have any rewiews for this movie </h3> )
+    }  
+    </>
     )
 };
+
+export default Rewies;

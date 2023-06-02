@@ -1,8 +1,10 @@
 import { useParams } from "react-router-dom"
 import { fetchCredits } from "../Api";
 import { useState, useEffect } from "react";
+import { CastCharacter, CastContainer, CastImage, CastName, CastPerson } from "./Cast.styled";
 
-export const Cast = () => {
+
+const Cast = () => {
     const {movieId} = useParams();
     const [castDetails, setCastDetails] = useState([]);
 
@@ -25,14 +27,22 @@ export const Cast = () => {
 
     return (
     <div> 
-        {castDetails.length > 0 && (castDetails.map(({id, name, photo, character}) => (
-           <ul key={id}>
-        <img src={photo} alt={name} /> 
-        <h1>{name}</h1>
-        <h2>Character: {character}</h2>
-           </ul>
-        ))
-        )}
+        {castDetails.length > 0 ? (
+        <CastContainer>
+            {castDetails.map(({id, name, photo, character}) => (
+                <>
+           <CastPerson key={id}>
+        <CastImage src={photo} alt={name} /> 
+        <CastName>{name}</CastName>
+        <CastCharacter>Character:   {character}</CastCharacter>
+           </CastPerson>
+           </>
+        ))}
+        </CastContainer>
+        ) : (<h3> Information is absent </h3>)
+        }
         </div>
     )
     };
+
+    export default Cast;

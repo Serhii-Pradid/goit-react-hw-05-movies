@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import {ToastContainer} from 'react-toastify';
 import { toast } from "react-toastify";
 import { fetchByQuery } from "components/Api";
@@ -12,15 +12,20 @@ const Movies = () => {
     const [movies, setMovies] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
     const movieId = searchParams.get('movieId')
+    const location = useLocation();
 
     useEffect(() => {
 
         async function getSearch() {
 
-          if (!movieId) {
+            if (!movieId) {
+                toast.error('Please, enter the search word', {
+                  position: "top-center",
+                  theme: "colored",
+                });
                 return;
-              } 
-             
+               };
+
         try { 
             const {queryData} = await fetchByQuery(movieId);
             console.log(queryData)
@@ -34,13 +39,13 @@ const Movies = () => {
                }
                        
               if (queryData.length !== 0) {
-                toast.success(`Hooray!!! We found your movies`, {
-                  position: "top-left",
+                toast.success(`Hooray!!! We found requested movies`, {
+                  position: "top-center",
                   theme: "colored",
                 })
                   } 
     
-            } catch(error) {
+        } catch(error) {
                console.log(error)
             }};
         
@@ -50,51 +55,42 @@ const Movies = () => {
 
         const handleSearchSubmit = e => {
             e.preventDefault();
-
-            /*if (movieId.trim() === '') {
-                toast.error('Please, enter the search word', {
-                  position: "top-center",
-                  theme: "colored",
-                });
-                return;
-               } */
-
-                const form = e.currentTarget;
-                setSearchParams({ movieId: form.elements.movieId.value });
+                 const form = e.currentTarget;
+                 setSearchParams({ movieId: form.elements.movieId.value });
                 form.reset();
               };
+
+              console.log(location)
             
     return (
         
          <div>
 <form onSubmit={handleSearchSubmit}>
-<input
+   <input
       type="text"
       autoComplete="off"
       autoFocus
       placeholder="Search movie title"
       name="movieId"
-      />
+    />
 
     <button type="submit">
       <span> <FcSearch size={10} /> </span> 
     </button> 
 </form>
         <ToastContainer autoClose={2000}/>
-
-                 
+              
         {movies.length > 0 && (movies.map(({id, title}) => (
           <ul key={id}>  
             <li>
-                <Link to={`/movies/${id}`}> {title} </Link>      
+                <Link to={`/movies/${id}`} state={{from:location}}> {title} </Link>      
             </li>
           </ul> 
             ))
         )}
-        
         </div>
     )
-};
+   };
 
 
 export default Movies;
