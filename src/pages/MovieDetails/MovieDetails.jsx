@@ -1,8 +1,10 @@
 import { useEffect, useState, useRef, Suspense } from "react";
 import { Outlet, useParams, useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { fetchDetailsMovies } from "components/Api";
+import PropTypes from 'prop-types';
+
 import { 
+    BackLink,
     CastRewies, 
     CastRewiesField, 
     CastRewiesLink, 
@@ -44,7 +46,7 @@ console.log(location)
 
     return (
         <div>
-            <Link to={backLinkLocationRes.current}> ← Go back </Link> 
+            <BackLink to={backLinkLocationRes.current}> ← Go back </BackLink> 
         <MovieContainer>
             {movieDetails && (
                 <MovieData>
@@ -83,3 +85,14 @@ console.log(location)
 };
 
 export default MovieDetails;
+
+
+MovieDetails.propTypes = {
+
+    poster: PropTypes.string,
+    vote: PropTypes.number,
+    title: PropTypes.string,
+    genres:PropTypes.array,
+    overview: PropTypes.string,
+    year: PropTypes.string
+};

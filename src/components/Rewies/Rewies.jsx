@@ -1,7 +1,9 @@
 import { useParams } from "react-router-dom";
 import { fetchRewies } from "../Api";
 import { useState, useEffect } from "react";
-import { RewiesContent,RewiesList, RewiesName } from "./Rewies.styled";
+import { NoRewies, RewiesContent,RewiesList, RewiesName } from "./Rewies.styled";
+
+import PropTypes from 'prop-types';
 
 const Rewies = () => {
     const {movieId} = useParams();
@@ -35,10 +37,16 @@ const Rewies = () => {
         ))}
     </>   
     
-    ) : ( <h3> We don't have any rewiews for this movie </h3> )
+    ) : ( <NoRewies> We don't have any rewiews for this movie </NoRewies> )
     }  
     </>
     )
 };
 
 export default Rewies;
+
+Rewies.propTypes = {
+    id: PropTypes.number,
+    author: PropTypes.string,
+    content: PropTypes.string,
+    };

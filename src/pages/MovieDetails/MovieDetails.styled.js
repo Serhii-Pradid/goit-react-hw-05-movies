@@ -1,6 +1,22 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
+export const BackLink = styled(NavLink)`
+display: flex;;
+font-size: 20px;
+font-weight: 600;
+margin-left: 40px;
+margin-top: 15px;
+margin-bottom: 15px;
+  text-decoration: none;
+  color: #515133;
+
+  &:hover {
+    font-weight: 800;
+    
+  };
+`;
+
 export const MovieContainer = styled.div`
   display: flex;
   padding: 30px;

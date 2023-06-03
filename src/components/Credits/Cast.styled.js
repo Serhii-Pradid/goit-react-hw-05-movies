@@ -32,5 +32,10 @@ font-weight: 400;
 font-size: 15px;
 color: #ffffff66;
 text-decoration: none;
-`
+`;
+
+export const NoCast = styled.h3`
+margin-left: 40px;
+color: red;
+`;
 

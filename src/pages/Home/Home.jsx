@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchTrandingMovies } from "components/Api";
 import { useLocation} from "react-router-dom";
+import PropTypes from 'prop-types';
 
 import { MovieLink, Title } from './Home.styled';
     
@@ -43,4 +44,9 @@ const Home = () => {
 };
 
 export default Home;
+
+Home.propTypes = {
+    id: PropTypes.number,
+    title: PropTypes.string,
+};
 

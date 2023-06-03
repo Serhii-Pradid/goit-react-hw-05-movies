@@ -3,8 +3,11 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 import {ToastContainer} from 'react-toastify';
 import { toast } from "react-toastify";
 import { fetchByQuery } from "components/Api";
-import { FcSearch } from "react-icons/fc";
+import { GiFilmProjector } from "react-icons/gi";
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
+
+import { SearchForm, SearchFormButton, SearchInput, Searchbar } from "./Movies/Movies.styled";
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -19,11 +22,7 @@ const Movies = () => {
         async function getSearch() {
 
             if (!movieId) {
-                toast.error('Please, enter the search word', {
-                  position: "top-center",
-                  theme: "colored",
-                });
-                return;
+                 return;
                };
 
         try { 
@@ -55,8 +54,8 @@ const Movies = () => {
 
         const handleSearchSubmit = e => {
             e.preventDefault();
-                 const form = e.currentTarget;
-                 setSearchParams({ movieId: form.elements.movieId.value });
+                const form = e.currentTarget;
+                setSearchParams({ movieId: form.elements.movieId.value });
                 form.reset();
               };
 
@@ -65,8 +64,9 @@ const Movies = () => {
     return (
         
          <div>
-<form onSubmit={handleSearchSubmit}>
-   <input
+          <Searchbar>
+<SearchForm onSubmit={handleSearchSubmit}>
+   <SearchInput
       type="text"
       autoComplete="off"
       autoFocus
@@ -74,10 +74,11 @@ const Movies = () => {
       name="movieId"
     />
 
-    <button type="submit">
-      <span> <FcSearch size={10} /> </span> 
-    </button> 
-</form>
+    <SearchFormButton type="submit">
+      <span> <GiFilmProjector size={40} /> </span> 
+    </SearchFormButton> 
+</SearchForm>
+</Searchbar>
         <ToastContainer autoClose={2000}/>
               
         {movies.length > 0 && (movies.map(({id, title}) => (
@@ -94,3 +95,11 @@ const Movies = () => {
 
 
 export default Movies;
+
+
+Movies.propTypes = {
+  id: PropTypes.number,
+  title: PropTypes.string,
+  onSubmit: PropTypes.func,
+};
+

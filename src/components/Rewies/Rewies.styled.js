@@ -20,6 +20,10 @@ display: flex;
 margin-top: 10px;
 font-weight: 600;
 font-size: 15px;
+`;
 
+export const NoRewies = styled.h3`
+margin-left: 40px;
+color: red;
 `;
 

@@ -1,7 +1,9 @@
 import { useParams } from "react-router-dom"
 import { fetchCredits } from "../Api";
 import { useState, useEffect } from "react";
-import { CastCharacter, CastContainer, CastImage, CastName, CastPerson } from "./Cast.styled";
+import { CastCharacter, CastContainer, CastImage, CastName, CastPerson, NoCast } from "./Cast.styled";
+
+import PropTypes from 'prop-types';
 
 
 const Cast = () => {
@@ -39,10 +41,18 @@ const Cast = () => {
            </>
         ))}
         </CastContainer>
-        ) : (<h3> Information is absent </h3>)
+        ) : (<NoCast> Information is absent </NoCast>)
         }
         </div>
     )
     };
 
     export default Cast;
+
+   Cast.propTypes = {
+        name: PropTypes.string,
+        id: PropTypes.number,
+        photo: PropTypes.string,
+        character: PropTypes.string,
+        };
+      

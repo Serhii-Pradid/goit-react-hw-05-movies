@@ -23,7 +23,6 @@ const Layout = () => {
         </Suspense>
         </main>
         <footer>
-            footer
         </footer>
       
       </div>
