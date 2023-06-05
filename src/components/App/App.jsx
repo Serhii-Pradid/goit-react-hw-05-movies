@@ -4,10 +4,10 @@ import Layout from "../Layout/Layout";
 
 
 const Home = lazy(() => import("../../pages/Home/Home"));
-const Movies = lazy(() => import("../../pages/Movies"));
+const Movies = lazy(() => import("../../pages/Movies/Movies"));
 const MovieDetails = lazy(() => import("../../pages/MovieDetails/MovieDetails"));
 const Rewies = lazy(() => import("../Rewies/Rewies"));
-const Cast = lazy(() => import("../Credits/Cast"));
+const Cast = lazy(() => import("../Cast/Cast"));
 
 
 export const App = () => {

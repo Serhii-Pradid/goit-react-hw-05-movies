@@ -15,7 +15,6 @@ const Rewies = () => {
 
             try {
                 const detailsRewies = await fetchRewies(movieId);
-                //console.log(detailsRewies);
                 setRewies(detailsRewies.rewiesData)
                 
             } catch (error) {

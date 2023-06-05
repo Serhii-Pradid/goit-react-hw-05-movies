@@ -3,11 +3,10 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 import {ToastContainer} from 'react-toastify';
 import { toast } from "react-toastify";
 import { fetchByQuery } from "components/Api";
-import { GiFilmProjector } from "react-icons/gi";
-import { Link } from "react-router-dom";
+//import { GiFilmProjector } from "react-icons/gi";
 import PropTypes from 'prop-types';
-
-import { SearchForm, SearchFormButton, SearchInput, Searchbar } from "./Movies/Movies.styled";
+import Searchbar from "components/MovieForm/MovieForm";
+import { MovieLink } from "./Movies.styled";
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -52,50 +51,34 @@ const Movies = () => {
             
         }, [movieId]);
 
-        const handleSearchSubmit = e => {
-            e.preventDefault();
-                const form = e.currentTarget;
-                setSearchParams({ movieId: form.elements.movieId.value });
-                form.reset();
-              };
+        const handleSearchSubmit = movieId => {
+            setSearchParams({ movieId });
+        };
 
               console.log(location)
             
     return (
         
          <div>
-          <Searchbar>
-<SearchForm onSubmit={handleSearchSubmit}>
-   <SearchInput
-      type="text"
-      autoComplete="off"
-      autoFocus
-      placeholder="Search movie title"
-      name="movieId"
-    />
 
-    <SearchFormButton type="submit">
-      <span> <GiFilmProjector size={40} /> </span> 
-    </SearchFormButton> 
-</SearchForm>
-</Searchbar>
+        <Searchbar onSearchSubmit={handleSearchSubmit} />
+         
         <ToastContainer autoClose={2000}/>
               
-        {movies.length > 0 && (movies.map(({id, title}) => (
-          <ul key={id}>  
-            <li>
-                <Link to={`/movies/${id}`} state={{from:location}}> {title} </Link>      
-            </li>
-          </ul> 
-            ))
-        )}
-        </div>
-    )
-   };
-
+        {movies.length > 0 && (
+<ul> 
+     {movies.map(({id, title}) => (
+  <li key={id}>
+      <MovieLink to={`/movies/${id}`} state={{from:location}}> → {title} </MovieLink>      
+  </li>
+      ))}
+</ul> 
+)}
+</div>
+)
+};
 
 export default Movies;
-
 
 Movies.propTypes = {
   id: PropTypes.number,

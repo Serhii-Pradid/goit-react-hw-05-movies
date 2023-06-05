@@ -17,13 +17,10 @@ import {
 const MovieDetails = () => {
 
     const {movieId} = useParams();
-    const [movieDetails, setMovieDetails] = useState([]);
+    const [movieDetails, setMovieDetails] = useState(null);
     const location = useLocation();
     const backLinkLocationRes = useRef(location.state?.from ?? '/');
     
-    const { poster, title, vote, genres, overview, year
-    } = movieDetails ?? {};
-
    useEffect(() => {
 
         async function getMovieDetails() {
@@ -41,6 +38,13 @@ const MovieDetails = () => {
             
 
     }, [movieId])
+
+    if (!movieDetails) {
+        return;
+      };
+
+    const { poster, title, vote, genres, overview, year
+    } = movieDetails;
 
 console.log(location)
 

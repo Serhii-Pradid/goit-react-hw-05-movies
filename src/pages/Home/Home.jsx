@@ -10,13 +10,11 @@ const Home = () => {
     const location = useLocation();
 
     useEffect(() => {
-        //console.log('монтируем страницу');
-;
+       
         async function getMovies() {
 
         try { 
             const trandingMovies = await fetchTrandingMovies();
-            //console.log(trandingMovies)
             setMovies(trandingMovies.movies)
 
         } catch(error) {
@@ -31,14 +29,18 @@ const Home = () => {
         <div>
         <Title>Tranding today</Title>
 
-        {movies.length > 0 && (movies.map(({id, title}) => (
-          <ul key={id}>  
-            <li>
+        {movies.length > 0 && (
+
+          <ul> 
+
+             {movies.map(({id, title}) => (
+
+            <li key={id}>
                 <MovieLink to={`/movies/${id}`} state={{from:location}}> → {title} </MovieLink>      
             </li>
+                ))}
           </ul> 
-            ))
-        )}
+          )}
          </div>
     )
 };

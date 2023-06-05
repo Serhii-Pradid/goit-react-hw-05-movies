@@ -13,9 +13,7 @@ export const fetchTrandingMovies = async() => {
     const response = await axios.get(
         `${URL}trending/movie/day?api_key=${API_KEY}`
     );
-    //console.log(response)
-
-    //return response.data;
+    
     const movies = response.data.results.map(({ id, title }) => {
         return {
           id,
@@ -65,8 +63,7 @@ export const fetchCredits = async(movieId) => {
                 };
                 });
          
-        //console.log(cast)
-        return{cast}
+          return{cast}
               }
 
 export const fetchRewies = async(movieId) => {
@@ -83,8 +80,7 @@ export const fetchRewies = async(movieId) => {
                 content,
                   };
                 });
-               
-              //console.log(rewiesData)
+              
               return{rewiesData}
                     }
 
@@ -105,13 +101,4 @@ export const fetchByQuery = async(query) => {
                    return{queryData}
                    }
 
-/*export const fetchByQuery = async(query) => {
-
-      const response = await axios.get(
-            `${URL}search/movie?api_key=${API_KEY}&query=${query}`
-                  );
-                  console.log(response)                                                  
-            return response.data  
-      }*/
-                         
             
