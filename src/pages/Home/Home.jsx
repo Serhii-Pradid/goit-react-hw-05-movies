@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { fetchTrandingMovies } from "components/Api";
-import { useLocation} from "react-router-dom";
 import PropTypes from 'prop-types';
 
-import { MovieLink, Title } from './Home.styled';
+import { MoviesList } from "components/MoviesList/MoviesList";
+
+import { Title } from './Home.styled';
     
 const Home = () => {
     const [movies, setMovies] = useState([])
-    const location = useLocation();
-
+   
     useEffect(() => {
        
         async function getMovies() {
@@ -29,18 +29,8 @@ const Home = () => {
         <div>
         <Title>Tranding today</Title>
 
-        {movies.length > 0 && (
+        <MoviesList movies={movies}/>
 
-          <ul> 
-
-             {movies.map(({id, title}) => (
-
-            <li key={id}>
-                <MovieLink to={`/movies/${id}`} state={{from:location}}> → {title} </MovieLink>      
-            </li>
-                ))}
-          </ul> 
-          )}
          </div>
     )
 };

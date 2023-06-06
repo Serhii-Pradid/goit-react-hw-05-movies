@@ -3,12 +3,11 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 import {ToastContainer} from 'react-toastify';
 import { toast } from "react-toastify";
 import { fetchByQuery } from "components/Api";
-//import { GiFilmProjector } from "react-icons/gi";
 import PropTypes from 'prop-types';
 import Searchbar from "components/MovieForm/MovieForm";
-import { MovieLink } from "./Movies.styled";
 
 import 'react-toastify/dist/ReactToastify.css';
+import { MoviesList } from "components/MoviesList/MoviesList";
 
 const Movies = () => {
     const [movies, setMovies] = useState([]);
@@ -64,17 +63,10 @@ const Movies = () => {
         <Searchbar onSearchSubmit={handleSearchSubmit} />
          
         <ToastContainer autoClose={2000}/>
+
+        <MoviesList movies={movies}/>
               
-        {movies.length > 0 && (
-<ul> 
-     {movies.map(({id, title}) => (
-  <li key={id}>
-      <MovieLink to={`/movies/${id}`} state={{from:location}}> → {title} </MovieLink>      
-  </li>
-      ))}
-</ul> 
-)}
-</div>
+        </div>
 )
 };
 

@@ -12,8 +12,7 @@ const Searchbar = ({onSearchSubmit}) => {
   const [searchQuery, setSearchQuery] = useState('');
   
   const handleChange = event => {
-    console.log(handleChange);
-     setSearchQuery(event.currentTarget.value.toLowerCase());
+        setSearchQuery(event.currentTarget.value.toLowerCase());
     };
 
   const handleSubmit = event => {
